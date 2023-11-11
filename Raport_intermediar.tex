@@ -1,0 +1,124 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Bone segmentation in MRI/CT\\}
+
+\author{
+\IEEEauthorblockN{Daian Tudor}
+\IEEEauthorblockA{\text{Grupa: 1310A}}
+\and
+\IEEEauthorblockN{Apostu Radu}
+\IEEEauthorblockA{Grupa: 1310B}
+\and
+\IEEEauthorblockN{Indrumator:}
+\IEEEauthorblockA{\text{Zvorișteanu Otilia}}
+}
+
+\maketitle
+
+
+
+
+\begin{abstract}
+Bone segmentation from CT or MRI images is an important ingredient to several diagnostics or treatment planning approaches and relevant to various diseases. As high-quality manual and semi-automatic bone segmentation is very time-consuming, a reliable and fully automatic approach would be of great interest in many scenarios. In this report, we present a method for segmenting bones in CT/MRI scans. Our approach uses a segmentation algorithm that is designed to accurately identify and segment bones in CT/MRI images. We evaluated our proposed algorithm on a dataset of CT scans and it has the potential to improve the accuracy and efficiency of bone segmentation, which could have important implications for medical diagnosis and treatment planning.
+\end{abstract}
+
+\vspace{5mm}
+
+\begin{IEEEkeywords}
+ segmentation, CT, bones
+\end{IEEEkeywords}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+Bone segmentation in CM/MRI scans is a crucial step in various medical applications, including orthopedic surgery planning, diagnosis of bone diseases, and the study of anatomical structures. Despite its importance, accurate and efficient bone segmentation remains a challenging task due to the complex nature of CT images, which often contain noise and artifacts, and the intricate and variable morphology of bones.
+
+In recent years, machine learning techniques have shown great potential in medical image analysis, providing new avenues for improving bone segmentation. Although most of the bones can be visually identified in CT images without difficulties, a precise automated segmentation is still very challenging. This report introduces a method for bone segmentation in CT scans, which uses algorithms that aim to improve both the accuracy and efficiency of the segmentation process.
+
+The remainder of this report is organized as follows:
+\begin{itemize}
+\item Section 2 - State-of-the-art
+\item Section 3 - Related work
+\item Section 4 - Method description
+\item Section 5 - Preliminary results
+\item Section 6 - Preliminary conclusions
+\item Section 7 - Bibliography
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{State-of-the-art}
+
+\subsection{ \textbf{Francesco la Rosa - A deep learning approach to bone segmentation in CT scans (2017)}:}
+\textit{Gray level features methods - By gray level features methods it is generally referred to the techniques that perform segmentation based on the intensity values of the pixels. Those include thresholding operations, region growing, region split and merge, edge based segmentation and a few more.\\ Thresholding is probably the simplest segmentation method and it is based on the assumption that different regions of the image have different intensity values. It tries to find a suitable gray value that divides the pixels in foreground, with an equal or higher intensity,
+and background, with a lower intensity.}
+
+Therefore, by applying a thresholding operation on a CT scan you could subtract the bone regions from the background, getting a clear imagery of the bones.
+
+\subsection{ \textbf{Donatello Conte/Pasquale Foggia/Francesco Tufano/Mario Vento - An Enhanced Level Set Algorithm for Wrist Bone Segmentation (2014)}:}
+\textit{In this paper we propose a novel segmentation method for MRI images, that is based on the
+integration of two complementary techniques: region growing and level set segmentation.
+Each technique is used at a different stage of the segmentation process, and the results are
+combined in such a way as to obtain a final segmentation that is not affected by the problems
+and limitations of both techniques when used alone.
+\\The new method is robust with respect to the choice of the initial seed and to the setup of the
+(few) parameters, yielding repeatable results; furthermore, its performance is high in terms
+of both the precision and recall indices, as we have demonstrated experimentally, resulting
+appropriate for Computer Aided Diagnosis applications that need accurate quantitative
+measurements.}
+
+When using these combined techniques separately, the region growing technique might produce over-segmentation if the threshold is set too low and under-segmentation if it is set too high. On the other hand, when using level set segmentation alone, it might produce errors due to irregular boundaries, corners or other singularities. It is also heavily dependent on initialization, as it forces the user to change the seed point until the desired result is achieved.
+
+\subsection{ \textbf{Eva Schnider/Antal Huck/Mireille Toranelli/Georg Rauter - Improved distinct bone segmentation from upper-body CT using binary-prediction-enhanced multi-class inference. (2022)}:}
+\textit{In this work, we propose binary-prediction-enhanced multi-class (BEM) inference, which takes into account an additional binary background/bone-tissue prediction, to improve the multi-class distinct bone segmentation. We evaluate the method using different ways of obtaining the binary prediction, contrasting a two-stage approach to four networks with two segmentation heads. We perform our experiments on two datasets: An in-house dataset comprising 16 upper-body CT scans with voxelwise labelling into 126 distinct classes, and a public dataset containing 50 synthetic CT scans, with 41 different classes.
+\\The most successful network with two segmentation heads achieves a class-median Dice coefficient of 0.85 on cross-validation with the upper-body CT dataset. These results outperform both our previously published 3D U-Net baseline with standard inference, and previously reported results from other groups. On the synthetic dataset, we also obtain improved results when using BEM-inference.}
+
+\subsection{ \textbf{Patrick Leydon1/Martin O’Connell/Derek Greene/Kathleen M Curran - Bone Segmentation in Contrast Enhanced Whole-Body Computed Tomography. (2020)}:}
+\textit{Segmentation of bone regions allows for enhanced diagnostics, disease
+characterisation and treatment monitoring in CT imaging. In contrast enhanced whole-
+body scans accurate automatic segmentation is particularly difficult as low dose whole
+body protocols reduce image quality and make contrast enhanced regions more difficult
+to separate when relying on differences in pixel intensities.
+\\This paper outlines a U-net architecture with novel preprocessing techniques, based
+on the windowing of training data and the modification of sigmoid activation threshold
+selection to successfully segment bone-bone marrow regions from low dose contrast
+enhanced whole-body CT scans. The proposed method achieved mean Dice coefficients
+of 0.979 ±0.02, 0.965 ±0.03, and 0.934 ±0.06 on two internal datasets and one external
+test dataset respectively. We have demonstrated that appropriate preprocessing is
+important for differentiating between bone and contrast dye, and that excellent results
+can be achieved with limited data.}
+
+\subsection{ \textbf{Eva Schnider/Julia Wolleb/Mireille Toranelli/Georg Rauter - Improved distinct bone segmentation in upper-body CT through multi-resolution networks. (2023)}:}
+\textit{Automated distinct bone segmentation from CT scans is widely used in planning and navigation workflows. U-Net variants are known to provide excellent results in supervised semantic segmentation. However, in distinct bone segmentation from upper-body CTs a large field of view and a computationally taxing 3D architecture are required. This leads to low-resolution results lacking detail or localisation errors due to missing spatial context when using high-resolution inputs.
+\\We propose to solve this problem by using end-to-end trainable segmentation networks that combine several 3D U-Nets working at different resolutions. Our approach, which extends and generalizes HookNet and MRN, captures spatial information at a lower resolution and skips the encoded information to the target network, which operates on smaller high-resolution inputs. We evaluated our proposed architecture against single-resolution networks and performed an ablation study on information concatenation and the number of context networks.
+\\Our proposed best network achieves a median DSC of 0.86 taken over all 125 segmented bone classes and reduces the confusion among similar-looking bones in different locations. These results outperform our previously published 3D U-Net baseline results on the task and distinct bone segmentation results reported by other groups.
+The presented multi-resolution 3D U-Nets address current shortcomings in bone segmentation from upper-body CT scans by allowing for capturing a larger field of view while avoiding the cubic growth of the input pixels and intermediate computations that quickly outgrow the computational capacities in 3D. The approach thus improves the accuracy and efficiency of distinct bone segmentation from upper-body CT.}
+
+\subsection{ \textbf{Soodeh Nikan/Kylen Van Osch/Mandolin Bartling/Daniel Allen/Alireza Rohani/Ben Connors - PWD-3DNet: A Deep Learning-Based Fully-Automated Segmentation of Multiple Structures on Temporal Bone CT Scans (2021):}}
+\textit{The temporal bone is a part of the lateral skull surface that contains organs responsible for hearing and balance. Mastering surgery of the temporal bone is challenging because of this complex and microscopic three-dimensional anatomy. Segmentation of intra-temporal anatomy based on computed tomography (CT) images is necessary for applications such as surgical training and rehearsal, amongst others. However, temporal bone segmentation is challenging due to the similar intensities and complicated anatomical relationships among critical structures, undetectable small structures on standard clinical CT, and the amount of time required for manual segmentation.
+\\This paper describes a single multi-class deep learning-based pipeline as the first fully automated algorithm for segmenting multiple temporal bone structures from CT volumes, including the sigmoid sinus, facial nerve, inner ear, malleus, incus, stapes, internal carotid artery and internal auditory canal. The proposed fully convolutional network, PWD-3DNet, is a patch-wise densely connected (PWD) three-dimensional (3D) network. The accuracy and speed of the proposed algorithm was shown to surpass current manual and semi-automated segmentation techniques.
+\\The experimental results yielded significantly high Dice similarity scores and low Hausdorff distances for all temporal bone structures with an average of 86 percent and 0.755 millimeter (mm), respectively. We illustrated that overlapping in the inference sub-volumes improves the segmentation performance. Moreover, we proposed augmentation layers by using samples with various transformations and image artefacts to increase the robustness of PWD-3DNet against image acquisition protocols, such as smoothing caused by soft tissue scanner settings and larger voxel sizes used for radiation reduction. The proposed algorithm was tested on low-resolution CTs acquired by another center with different scanner parameters than the ones used to create the algorithm and shows potential for application beyond the particular training data used in the study.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related work}
+% https://www.frontiersin.org/articles/10.3389/frsip.2022.857313/full
+Several related works have contributed to the advancements in bone segmentation from CT scans. For instance, a method called CEL-Unet has been developed to boost the segmentation quality of the femur and tibia in the osteoarthritic knee joint. This network embeds region-aware and two contour-aware branches in the decoding path.
+
+\\Another work focused on the segmentation of various distinct bones visible on CT scans to provide semantic information and feedback to planning and navigation tools. Bone segmentations can also be used as a strong starting point for atlas-based approaches, or as location anchors to detect organs and other body structures.
+
+\\In addition, there are methods that use the 2D region growing approach to segment and label fractured bone pieces from CT images, and others that developed an automatic approach, named patch-based deep belief networks (PaDBNs), for vertebrae segmentation in CT images.
+
+\\These advancements and related works have significantly contributed to the progress in bone segmentation from CT scans, providing valuable tools for planning and navigation tasks in medical applications.
+
+
+
+
+\end{document}
