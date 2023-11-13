@@ -118,7 +118,18 @@ Several related works have contributed to the advancements in bone segmentation 
 
 \\These advancements and related works have significantly contributed to the progress in bone segmentation from CT scans, providing valuable tools for planning and navigation tasks in medical applications.
 
+\section{Method description}
+The program makes use of an enhancing function that increases the sharpness and the contrast of the image to make it easier for the algorithm to segment the bones. Afterwards, we apply a threshold based by Otsu's method to select only the bones when doing the segmentation. Finally, we color the highlighted bones accordingly.
+\\The main function reads an image, applies the above functions, and displays the original and the processed images. It’s important to note that the effectiveness of this code will depend on the specific characteristics of the CT scan images being used. Adjustments may be needed for optimal results.
 
+\section{Preliminary results}
+The first result we get is an enhanced image with better contrast and sharper edges, making the details more visible. 
 
+\section{Preliminary conclusions}
+This enhancement is a common technique in image processing that will prove useful later on when we will apply the segmentation algorithms.
 
+\section{Bibliography}
+https://docs.opencv.org/4.x/
+
+https://en.wikipedia.org/wiki/Otsu's_method
 \end{document}
