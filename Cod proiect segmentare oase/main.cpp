@@ -16,7 +16,7 @@ int main()
 		imshow("Original", source_img);
 
 
-		// accentual sharpness-ul si contrastul imaginii pentru a delimita mai clar zonele
+		// accentuam sharpness-ul si contrastul imaginii pentru a delimita mai clar zonele
 		sharpened_img = enhance(source_img);
 		imshow("Imagine enhanced", sharpened_img);
 
